@@ -7,23 +7,26 @@ import java.util.ArrayList;
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
  */                                                                                 
-public class Student extends Human {                                                
-                                                                                    
+public class Student extends Human {
+
+  private final double gpa;
+
   /**                                                                               
    * Creates a new <code>Student</code>                                             
    *                                                                                
-   * @param name                                                                    
+   * @param name;
    *        The student's name                                                      
    * @param classes                                                                 
    *        The names of the classes the student is taking.  A student              
    *        may take zero or more classes.                                          
-   * @param gpa                                                                     
+   * @param gpa;
    *        The student's grade point average                                       
    * @param gender                                                                  
    *        The student's gender ("male" or "female", or "other", case insensitive)
    */                                                                               
   public Student(String name, ArrayList<String> classes, double gpa, String gender) {
     super(name);
+    this.gpa = gpa;
   }
 
   /**                                                                               
@@ -39,7 +42,7 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    return getName() + " has a gpa of " + getGpa() + " ";
   }
 
   /**
@@ -50,5 +53,9 @@ public class Student extends Human {
   public static void main(String[] args) {
     System.err.println("Missing command line arguments");
     System.exit(1);
+  }
+
+  public double getGpa() {
+    return this.gpa;
   }
 }
