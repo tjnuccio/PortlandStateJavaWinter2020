@@ -27,7 +27,7 @@ public class Flight extends AbstractFlight {
 
     //Flight Source
     if(flightSrc.length() != 3) {
-      throw new IllegalArgumentException(flightSrc + " contains too many letters.");
+      throw new IllegalArgumentException("Flight source should be a three-letter code.");
     }
     else if(flightSrc.matches(".*\\d.*")) {
       throw new IllegalArgumentException(flightSrc + " contains integer values.");

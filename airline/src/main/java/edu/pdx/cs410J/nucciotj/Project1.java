@@ -8,7 +8,7 @@ public class Project1 {
   public static void main(String[] args) {
 
     if(args.length != 8) {
-      System.err.println("Missing command line arguments");
+      System.err.println("Incorrect number of command line arguments");
       System.exit(1);
     }
     else {
