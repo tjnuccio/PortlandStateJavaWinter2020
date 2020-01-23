@@ -16,40 +16,40 @@ public class AirlineTest {
     @Test
     public void getAirlineNameJetBlue() {
         String name = "Jet Blue";
-        Airline airline = new Airline(name);
+        Airline<Flight> airline = new Airline<>(name);
         assertThat(airline.getName(), equalTo(name));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenAirlineNameIsBlankThrowIllegalArgumentException() {
         String name = " ";
-        Airline airline = new Airline(name);
+        Airline<Flight> airline = new Airline<>(name);
     }
 
     @Test
     public void addFlightToAirline() {
         Flight flight = new Flight(111, "AAA", "10:00", "3/15/2017", "AAA", "11:00", "3/15/2017");
-        Airline airline = new Airline("Jet Blue");
+        Airline<Flight> airline = new Airline<>("Jet Blue");
         airline.addFlight(flight);
     }
 
     @Test
     public void whenAddingOneFlightCheckThatGetFlightsSizeEqualsOne() {
         Flight flight = new Flight(111, "AAA", "10:00", "3/15/2017", "AAA", "11:00", "3/15/2017");
-        Airline airline = new Airline("Jet Blue");
+        Airline<Flight> airline = new Airline<>("Jet Blue");
         airline.addFlight(flight);
 
-        ArrayList list = new ArrayList(airline.getFlights());
+        ArrayList<Flight> list = new ArrayList<>(airline.getFlights());
         assertThat(list.size(), equalTo(1));
     }
 
     @Test
     public void afterAddingFlightToAirlineUseGetFlightsMethodAndCheckFlightMatchesWhatWasAdded() {
         Flight flight = new Flight(111, "AAA", "10:00", "3/15/2017", "AAA", "11:00", "3/15/2017");
-        Airline airline = new Airline("Jet Blue");
+        Airline<Flight> airline = new Airline<>("Jet Blue");
         airline.addFlight(flight);
 
-        ArrayList list = new ArrayList(airline.getFlights());
+        ArrayList<Flight> list = new ArrayList<>(airline.getFlights());
 
         assertThat(list.get(0), equalTo(flight));
     }
@@ -57,7 +57,7 @@ public class AirlineTest {
     @Test (expected = IllegalArgumentException.class)
     public void whenAddingFlightWithSameFlightNumberToAirlineTwiceThrowException() {
         Flight flight = new Flight(111, "AAA", "10:00", "3/15/2017", "AAA", "11:00", "3/15/2017");
-        Airline airline = new Airline("Jet Blue");
+        Airline<Flight> airline = new Airline<>("Jet Blue");
         airline.addFlight(flight);
         airline.addFlight(flight);
     }
