@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.nucciotj;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -84,6 +85,14 @@ public class Project1IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardError(), containsString("Missing arrival time"));
     }
 
+    @Test
+    public void whenFlightSourceContainsNumberIllegalArgumentExceptionShouldBeCaughtInMain() {
+        MainMethodResult result = invokeMain(Project1.class, "AirlineName", "1", "AA1", "aaa", "aaa", "aaa", "aaa", "aaa");
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardError(), containsString("AA1 contains integer values."));
+    }
+
+    @Ignore
     @Test
     public void runMainWithCorrectlyFormattedArgumentsAndCheckStandardOutIsCorrect() {
         MainMethodResult result = invokeMain(Project1.class,"Airline", "1", "AAA", "3/15/2017", "10:00",  "AAA",  "3/15/2017", "11:00");

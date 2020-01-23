@@ -17,41 +17,47 @@ public class Project1 {
 
     if(args.length != 8) {          //Test cases for when too few command line arguments are supplied
       if(args.length == 0) {
-        System.err.println("Missing command line arguments");
-        System.exit(1);
+        printErrorMessageAndExit("Missing command line arguments");
       } else if(args.length == 1) {
-        System.err.println("Missing flight number");
-        System.exit(1);
+        printErrorMessageAndExit("Missing flight number");
       } else if(args.length == 2) {
-        System.err.println("Missing departure destination");
-        System.exit(1);
+        printErrorMessageAndExit("Missing departure destination");
       } else if(args.length == 3) {
-        System.err.println("Missing departure date");
-        System.exit(1);
+        printErrorMessageAndExit("Missing departure date");
       } else if(args.length == 4) {
-        System.err.println("Missing departure time");
-        System.exit(1);
+        printErrorMessageAndExit("Missing departure time");
       } else if(args.length == 5) {
-        System.err.println("Missing arrival destination");
-        System.exit(1);
+        printErrorMessageAndExit("Missing arrival destination");
       } else if(args.length == 6) {
-        System.err.println("Missing arrival date");
-        System.exit(1);
+        printErrorMessageAndExit("Missing arrival date");
       } else if(args.length == 7) {
-        System.err.println("Missing arrival time");
-        System.exit(1);
+        printErrorMessageAndExit("Missing arrival time");
+      }
+    } else {
+      String flightNumString = args[1];
+      try {
+        int flightNumber = Integer.parseInt(flightNumString);
+        Flight flight = new Flight(flightNumber, args[2], args[4], args[3], args[5], args[7], args[6]);
+        Airline<Flight> airline = new Airline<>(args[0]);
+        airline.addFlight(flight);
+        flight.toString();
+      } catch (NumberFormatException ex) {
+        printErrorMessageAndExit(flightNumString + " is incorrectly formatted. "  + flightNumString + " should be an integer");
+      } catch(IllegalArgumentException ex) {
+        printErrorMessageAndExit(ex.getMessage());
       }
     }
-
-    Flight flight = new Flight(Integer.parseInt(args[1]), args[2], args[4], args[3], args[5], args[7], args[6]);
-
-    System.out.println(flight.toString());
 
 
 
 
     System.exit(0);
 
+  }
+
+  public static void printErrorMessageAndExit(String msg) {
+    System.err.println(msg);
+    System.exit(1);
   }
 
 }

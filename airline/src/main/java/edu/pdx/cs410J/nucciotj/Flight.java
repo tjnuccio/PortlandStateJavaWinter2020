@@ -20,6 +20,7 @@ public class Flight extends AbstractFlight {
   private Date departDate;
 
   /**
+   *
    * Constructor for Flight class.
    * @param    flightNum    number associated with a given fight
    * @param    flightSrc    source airport associated with a given flight
@@ -32,12 +33,7 @@ public class Flight extends AbstractFlight {
    * @throws  IllegalArgumentException for incorrectly formatted parameters
    *
    */
-  public Flight(int flightNum, String flightSrc, String departTime, String departDate, String flightDest, String arrivalTime, String arrivalDate) {
-
-    String [] aDate;
-    String [] aTime;
-    String [] dDate;
-    String [] dTime;
+  public Flight(int flightNum, String flightSrc, String departTime, String departDate, String flightDest, String arrivalTime, String arrivalDate) throws IllegalArgumentException{
 
     if(flightNum < 0) {                                                         //Flight number
       throw new IllegalArgumentException("Flight number must be positive");
@@ -48,17 +44,17 @@ public class Flight extends AbstractFlight {
     //Flight Source
     if(flightSrc.length() != 3) {
       throw new IllegalArgumentException("Flight source should be a three-letter code.");
-    } else if(flightSrc.matches(".*\\d.*")) {
-      throw new IllegalArgumentException(flightSrc + " contains integer values.");
+    } else if (flightSrc.matches(".*\\d.*")) {
+      throw new IllegalArgumentException(flightSrc + " contains integer values. Should be three-letter code.");
     } else {
       this.flightSrc = flightSrc;
     }
 
     //Flight destination
     if(flightDest.length() != 3) {
-      throw new IllegalArgumentException(flightDest + " contains too many letters.");
+      throw new IllegalArgumentException("Flight destination should be three-letter code.");
     } else if(flightDest.matches(".*\\d.*")) {
-      throw new IllegalArgumentException(flightDest + " contains integer values.");
+      throw new IllegalArgumentException(flightDest + " contains integer values. Should be three-letter code.");
     } else {
       this.flightDest = flightDest;
     }
@@ -70,8 +66,8 @@ public class Flight extends AbstractFlight {
       throw new IllegalArgumentException(arrivalTime + " is incorrectly formatted. Should be of format: hour:mins");
     } else {
 
-      aDate = arrivalDate.split("/");         //Arrival date string parsed into array of strings containing year - 0, month - 1, and day - 2
-      aTime = arrivalTime.split(":");         //Arrival time string parsed into array of strings containing hour - 0 and mins - 1
+      String [] aDate = arrivalDate.split("/");         //Arrival date string parsed into array of strings containing year - 0, month - 1, and day - 2
+      String [] aTime = arrivalTime.split(":");         //Arrival time string parsed into array of strings containing hour - 0 and mins - 1
 
       if(Integer.parseInt(aTime[0]) > 23 || Integer.parseInt(aTime[1]) > 59) {            //Check for hours and mins out of bounds
         throw new IllegalArgumentException("Arrival time should formatted with hours between 0 - 23 and mins between 0 - 59.");
@@ -88,8 +84,8 @@ public class Flight extends AbstractFlight {
     } else if(!departTime.matches("\\d\\d?:\\d\\d")) {                               //Match input time to regex
       throw new IllegalArgumentException(departTime + " is incorrectly formatted. Should be of format: hour:mins");
     } else {
-      dDate = departDate.split("/");         //Departure date string parsed into array of strings containing year - 0, month - 1, and day - 2
-      dTime = departTime.split(":");         //Departure time string parsed into array of strings containing hour - 0 and mins - 1
+      String [] dDate = departDate.split("/");         //Departure date string parsed into array of strings containing year - 0, month - 1, and day - 2
+      String [] dTime = departTime.split(":");         //Departure time string parsed into array of strings containing hour - 0 and mins - 1
 
       if(Integer.parseInt(dTime[0]) > 23 || Integer.parseInt(dTime[1]) > 59) {            //Check for hours and mins out of bounds
         throw new IllegalArgumentException("Departure time should formatted with hours between 0 - 23 and mins between 0 - 59.");

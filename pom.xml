@@ -36,7 +36,7 @@ accordingly
         
   
   
-  <groupId>edu.pdx.cs410J.YourUserId</groupId>
+  <groupId>edu.pdx.cs410J.nucciotj</groupId>
         
   
   
@@ -60,7 +60,7 @@ accordingly
         
   
   
-  <url>http://YourGitHubUser.github.io/PortlandStateJavaWinter2020</url>
+  <url>http://tjnuccio.github.io/PortlandStateJavaWinter2020</url>
         
   
   
@@ -109,7 +109,7 @@ accordingly
                 
     
     
-    <url>https://github.com/YourGitHubUser/PortlandStateJavaWinter2020/issues</url>
+    <url>https://github.com/tjnuccio/PortlandStateJavaWinter2020/issues</url>
               
   
   
@@ -205,7 +205,7 @@ accordingly
                 
     
     
-    <connection>scm:git:git@github.com:GitHubUserName/PortlandStateJavaWinter2020.git</connection>
+    <connection>scm:git:git@github.com:tjnuccio/PortlandStateJavaWinter2020.git</connection>
               
   
   
@@ -257,7 +257,7 @@ accordingly
                         
       
       
-      <url>github:http://YourGitHubUser.github.io/PortlandStateJavaWinter2020/</url>
+      <url>github:http://tjnuccio.github.io/PortlandStateJavaWinter2020/</url>
                       
     
     
