@@ -61,5 +61,11 @@ public class AirlineTest {
         airline.addFlight(flight);
         airline.addFlight(flight);
     }
+
+    @Test
+    public void callAirlineConstructorWithNoArgsAndConfirmNotNull() {
+        Airline airline = new Airline();
+        assertThat(airline, is(notNullValue()));
+    }
 }
 

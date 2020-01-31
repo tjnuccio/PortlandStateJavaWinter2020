@@ -33,7 +33,7 @@ public class Flight extends AbstractFlight {
    * @throws  IllegalArgumentException for incorrectly formatted parameters
    *
    */
-  public Flight(int flightNum, String flightSrc, String departTime, String departDate, String flightDest, String arrivalTime, String arrivalDate) throws IllegalArgumentException{
+  public Flight(int flightNum, String flightSrc, String departTime, String departDate, String flightDest, String arrivalTime, String arrivalDate) throws IllegalArgumentException {
 
     if(flightNum < 0) {                                                         //Flight number
       throw new IllegalArgumentException("Flight number must be positive");

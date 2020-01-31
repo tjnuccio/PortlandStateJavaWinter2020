@@ -18,6 +18,14 @@ public class Airline<T extends Flight> extends AbstractAirline<T> {
     private Map<Integer, T> flights;
 
     /**
+     * Default airline constructor with no parameters
+     */
+    public Airline() {
+        this.name = "";
+        this.flights = new HashMap<>();
+    }
+
+    /**
      * Airline contructor.
      * @param name name of the airline
      * @throws IllegalArgumentException if airline name is left blank

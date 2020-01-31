@@ -238,4 +238,5 @@ public class FlightTest {
   public void whenDepartureTimeHasNeagtiveHoursThrowIllegalArgumentException() {
     Flight flight = new Flight(1, "AAA", "-10:00", "3/15/2017", "AAA", "10:00", "3/15/2017");
   }
+
 }
