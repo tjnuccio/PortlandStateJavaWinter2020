@@ -54,13 +54,13 @@ public class AirlineTest {
         assertThat(list.get(0), equalTo(flight));
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void whenAddingFlightWithSameFlightNumberToAirlineTwiceThrowException() {
-        Flight flight = new Flight(111, "AAA", "10:00", "3/15/2017", "AAA", "11:00", "3/15/2017");
-        Airline<Flight> airline = new Airline<>("Jet Blue");
-        airline.addFlight(flight);
-        airline.addFlight(flight);
-    }
+//    @Test (expected = IllegalArgumentException.class)
+//    public void whenAddingFlightWithSameFlightNumberToAirlineTwiceThrowException() {
+//        Flight flight = new Flight(111, "AAA", "10:00", "3/15/2017", "AAA", "11:00", "3/15/2017");
+//        Airline<Flight> airline = new Airline<>("Jet Blue");
+//        airline.addFlight(flight);
+//        airline.addFlight(flight);
+//    }
 
     @Test
     public void callAirlineConstructorWithNoArgsAndConfirmNotNull() {

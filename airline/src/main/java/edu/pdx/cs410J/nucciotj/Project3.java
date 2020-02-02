@@ -1,10 +1,10 @@
 package edu.pdx.cs410J.nucciotj;
 
 import edu.pdx.cs410J.ParserException;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -18,7 +18,7 @@ import java.util.LinkedList;
  *
  * Command Line Args: (int flightNum, String sourceDestination, String departTime, String departDate, String arrivalDestination, String arrivalTime, String arrivalDate)
  */
-public class Project2 {
+public class Project3 {
 
   private static LinkedList<String> argList;
   private static LinkedList<String> optionList;
@@ -32,30 +32,36 @@ public class Project2 {
     checkForReadMeOption(optionList);         //Check for and print readme
     checkArgList(argList);                    //Validate arg list is properly formatted
 
-    if(optionList.contains("-textFile")) {                  //Textfile option selected
-
-      String filePath = optionList.get(optionList.indexOf("-textFile") + 1);
-
-      TextParser parser = new TextParser(filePath, argList.get(0));       //Call parser, add airline, then dump
-      parser.parse();
-
-      if(parser == null) {
-        System.out.println("File does not exist");        //Create file that will be written out to
-      } else {
-        System.out.println("File does exist");
-      }
-
-    }
-
     String flightNumString = argList.get(1);
 
     try {
+
       int flightNumber = Integer.parseInt(flightNumString);       //Convert flightNum string to integer
+      Flight flight = new Flight(flightNumber, argList.get(2), argList.get(4), argList.get(3), argList.get(5), argList.get(7), argList.get(6));     //Initialize flight
 
-      Airline<Flight> airline = new Airline<>(argList.get(0));      //Initialize airline
-      Flight flight = new Flight(flightNumber, argList.get(2), argList.get(4), argList.get(3), argList.get(5), argList.get(7), argList.get(6));     //Initalize flight
+      if(optionList.contains("-textFile")) {                  //Textfile option selected
 
-      airline.addFlight(flight);
+        String filePath = optionList.get(optionList.indexOf("-textFile") + 1);
+
+        TextParser parser = new TextParser(filePath, argList.get(0));       //Call parser, add airline, then dump
+        TextDumper dumper = new TextDumper(filePath);
+        Airline airline = parser.parse();
+
+        if(airline != null) {
+          airline.addFlight(flight);
+        } else {
+          File file = new File(filePath);
+          file.createNewFile();
+          airline = new Airline(argList.get(0));
+          airline.addFlight(flight);
+        }
+
+        dumper.dump(airline);
+
+      } else {
+        Airline airline = new Airline(argList.get(0));      //Initialize airline
+        airline.addFlight(flight);
+      }
 
       if (optionList.contains("-print")) {
         System.out.println(flight.toString());
@@ -63,9 +69,12 @@ public class Project2 {
 
     } catch (NumberFormatException ex) {
       printErrorMessageAndExit(flightNumString + " is incorrectly formatted. " + flightNumString + " should be an integer");
-
     } catch (IllegalArgumentException ex) {
       printErrorMessageAndExit(ex.getMessage());
+    } catch (IOException e) {
+      printErrorMessageAndExit(e.getMessage());
+    } catch (ParserException e) {
+      printErrorMessageAndExit(e.getMessage());
     }
 
     System.exit(0);
@@ -73,7 +82,7 @@ public class Project2 {
 
   public static void checkForReadMeOption(LinkedList<String> optionList) {
     if (optionList.contains("-README")) {
-      System.out.println("\nThis is a Project 1. The purpose of project 1 is to read in options and arguments from the command line,\n" +
+      System.out.println("\nThis is a Project 2. The purpose of project 1 is to read in options and arguments from the command line,\n" +
               "parse them, construct two objects, and possibly print to standard output if the option is specified. \n" +
               "The program accepts two options: -print and -README. The -README option will print the README associated with \n" +
               "the program and then exit. The -print option will assemble the program objects, and display the data associated with \n" +

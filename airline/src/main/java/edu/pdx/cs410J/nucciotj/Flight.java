@@ -18,6 +18,10 @@ public class Flight extends AbstractFlight {
   private String flightDest;
   private Date arrivalDate;
   private Date departDate;
+  private String arrivalTimeString;
+  private String arrivalDateString;
+  private String departureTimeString;
+  private String departureDateString;
 
   /**
    *
@@ -34,6 +38,11 @@ public class Flight extends AbstractFlight {
    *
    */
   public Flight(int flightNum, String flightSrc, String departTime, String departDate, String flightDest, String arrivalTime, String arrivalDate) throws IllegalArgumentException {
+
+    this.arrivalTimeString = arrivalTime;
+    this.arrivalDateString = arrivalDate;
+    this.departureTimeString = departTime;
+    this.departureDateString = departDate;
 
     if(flightNum < 0) {                                                         //Flight number
       throw new IllegalArgumentException("Flight number must be positive");
@@ -153,5 +162,21 @@ public class Flight extends AbstractFlight {
   @Override
   public Date getDeparture() {
     return this.departDate;
+  }
+
+  public String getATimeString() {
+    return this.arrivalTimeString;
+  }
+
+  public String getADateString() {
+    return this.arrivalDateString;
+  }
+
+  public String getDTimeString() {
+    return this.departureTimeString;
+  }
+
+  public String getDDateString() {
+    return this.departureDateString;
   }
 }

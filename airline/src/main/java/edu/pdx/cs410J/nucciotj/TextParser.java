@@ -4,14 +4,13 @@ import edu.pdx.cs410J.AirlineParser;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Classes that implement this interface read some source and from it
- * create an airline.
+ * @author TJ Nuccio
+ * TextParser class for Project1. The TextParser class implements the AirlineParser
+ * interface. The TextParser will read and parse a file supplied to it by the command line.
  */
 
 public class TextParser implements AirlineParser {
@@ -19,17 +18,32 @@ public class TextParser implements AirlineParser {
     private File file;
     private String airlineName;
     private BufferedReader buffReader;
-
-    public TextParser(String filePath, String name) throws FileNotFoundException {
-        this.file = new File(filePath);                                      //File object
-        this.airlineName = name;                                             //Airline name from command line
-        this.buffReader = new BufferedReader(new FileReader(file));           //Bufferreader for filereader
+    /**
+     * Constructor for TextParser class.
+     * @param    filePath    filepath to be read from
+     * @param    name       name of the airline supplied on the command line to compare against airline name in file
+     */
+    public TextParser(String filePath, String name) {
+        try {
+            this.file = new File(filePath);                                      //File object
+            this.airlineName = name;                                             //Airline name from command line
+            this.buffReader = new BufferedReader(new FileReader(file));           //Bufferreader for filereader
+        } catch (FileNotFoundException e) {
+        }
     }
 
+    /**
+     * The parse method will attempt to read the flights from the file supplied on the command
+     * line. If the airline name is found not to match the one supplied on the commmand line, or
+     * if the file is malformatted, a parser exception will be thrown to main.
+     * @return  airline that is created from the airline name and flights found in the file
+     * @throws  ParserException
+     */
     @Override
     public Airline parse() throws ParserException {
 
-        if(!file.exists()) {
+
+        if(!file.exists() || file.length() == 0) {
             return null;
         }
 
@@ -38,11 +52,11 @@ public class TextParser implements AirlineParser {
             List<String> list;
             list = buffReader.lines().collect(Collectors.toList());
 
-            String airlineName = list.get(0);
+            String fileAirlineName = list.get(0);
 
             Airline airline = new Airline(airlineName);                             //Test against command line airline name
 
-            if (airline.getName() != airlineName) {
+            if (!airline.getName().equals(fileAirlineName)) {
                 throw new ParserException("Airline name provided does not match that of file.");
             }
 

@@ -62,11 +62,12 @@ public class Airline<T extends Flight> extends AbstractAirline<T> {
     @Override
     public void addFlight(T flight) {
 
-        if(flights.containsKey(flight.getNumber())) {
-            throw new IllegalArgumentException("Flight " + flight.getNumber() + " already exists for the current airline.");
-        } else {
-            flights.put(flight.getNumber(), flight);
-        }
+//        if(flights.containsKey(flight.getNumber())) {
+//            throw new IllegalArgumentException("Flight " + flight.getNumber() + " already exists for the current airline.");
+//        } else {
+//        }
+        flights.put(flight.getNumber(), flight);
+
     }
 
     /**
