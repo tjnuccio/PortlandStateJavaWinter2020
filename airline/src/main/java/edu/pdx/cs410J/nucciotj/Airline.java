@@ -2,9 +2,7 @@ package edu.pdx.cs410J.nucciotj;
 
 import edu.pdx.cs410J.AbstractAirline;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author TJ Nuccio
@@ -15,14 +13,14 @@ import java.util.Map;
 public class Airline<T extends Flight> extends AbstractAirline<T> {
 
     private final String name;
-    private Map<Integer, T> flights;
+    private List flights;
 
     /**
      * Default airline constructor with no parameters
      */
     public Airline() {
         this.name = "";
-        this.flights = new HashMap<>();
+        this.flights = new ArrayList<>();
     }
 
     /**
@@ -38,7 +36,7 @@ public class Airline<T extends Flight> extends AbstractAirline<T> {
             this.name = name;
         }
 
-        this.flights = new HashMap<>();
+        this.flights = new ArrayList<>();
 
     }
     /**
@@ -61,12 +59,8 @@ public class Airline<T extends Flight> extends AbstractAirline<T> {
      */
     @Override
     public void addFlight(T flight) {
-
-//        if(flights.containsKey(flight.getNumber())) {
-//            throw new IllegalArgumentException("Flight " + flight.getNumber() + " already exists for the current airline.");
-//        } else {
-//        }
-        flights.put(flight.getNumber(), flight);
+        
+        flights.add(flight);
 
     }
 
@@ -76,7 +70,7 @@ public class Airline<T extends Flight> extends AbstractAirline<T> {
      */
     @Override
     public Collection<T> getFlights() {
-        return this.flights.values();
+        return this.flights;
     }
 
 }

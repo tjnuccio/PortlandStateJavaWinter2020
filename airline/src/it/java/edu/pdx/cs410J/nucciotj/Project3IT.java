@@ -2,6 +2,7 @@ package edu.pdx.cs410J.nucciotj;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -31,7 +32,7 @@ public class Project3IT extends InvokeMainTestCase {
 
     @Test
     public void runMainWithCorrectlyFormattedArguments() {
-        MainMethodResult result = invokeMain(Project3.class,"Airline", "1", "AAA", "3/15/2017", "10:00",  "AAA",  "3/15/2017", "11:00");
+        MainMethodResult result = invokeMain(Project3.class,"Airline", "1", "AAA", "3/15/2017", "10:00", "am", "AAA",  "3/15/2017", "11:00", "am");
         assertThat(result.getExitCode(), equalTo(0));
     }
 
@@ -84,7 +85,7 @@ public class Project3IT extends InvokeMainTestCase {
         assertThat(result.getTextWrittenToStandardError(), containsString("Missing arrival time"));
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void whenFlightSourceContainsNumberIllegalArgumentExceptionShouldBeCaughtInMain() {
         MainMethodResult result = invokeMain(Project3.class, "AirlineName", "1", "AA1", "aaa", "aaa", "aaa", "aaa", "aaa");
         assertThat(result.getExitCode(), equalTo(1));
@@ -93,9 +94,9 @@ public class Project3IT extends InvokeMainTestCase {
 
     @Test
     public void runMainWithCorrectlyFormattedArgumentsAndCheckStandardOutIsCorrect() {
-        MainMethodResult result = invokeMain(Project3.class,"-print", "Airline", "1", "AAA", "3/15/2017", "10:00",  "AAA",  "3/15/2017", "11:00");
+        MainMethodResult result = invokeMain(Project3.class,"-print", "Airline", "1", "AAA", "3/15/2017", "10:00", "am", "AAA",  "3/15/2017", "11:00", "am");
         assertThat(result.getExitCode(), equalTo(0));
-        assertThat(result.getTextWrittenToStandardOut(), containsString("Flight 1 departs AAA at Wed Mar 15 10:00:00 PDT 2017 arrives AAA at Wed Mar 15 11:00:00 PDT 2017"));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("Flight 1 departs AAA at 3/15/17, 10:00 AM arrives AAA at 3/15/17, 11:00 AM"));
     }
 
     @Test
@@ -106,28 +107,49 @@ public class Project3IT extends InvokeMainTestCase {
 
     @Test
     public void whenFileIsSuppliedAndTextFileOptionSuppliedExitZero() {
-        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/data.txt", "Jet Blue", "1", "AAA", "3/15/2017", "10:00",  "AAA",  "3/15/2017", "11:00");
-        assertThat(result.getTextWrittenToStandardOut(), containsString("Flight 1 departs AAA at Wed Mar 15 10:00:00 PDT 2017 arrives AAA at Wed Mar 15 11:00:00 PDT 2017"));
+        MainMethodResult result = invokeMain(Project3.class,"-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/dta.txt", "-print", "Airline", "1", "ISP", "3/15/2017", "10:00", "am", "ISP",  "3/15/2017", "11:00", "am");
+        assertThat(result.getTextWrittenToStandardOut(), containsString("Flight 1 departs ISP at 3/15/17, 10:00 AM arrives ISP at 3/15/17, 11:00 AM"));
         assertThat(result.getExitCode(), equalTo(0));
     }
 
     @Test
     public void whenTextFileProvidedIsFormattedIncorrectlyExitOne() {
-        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "~/ dat a.txt", "Airline", "1", "AAA", "3/15/2017", "10:00",  "AAA",  "3/15/2017", "11:00");
+        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "~/ dat a.txt", "Airline", "1", "AAA", "3/15/2017", "am", "10:00",  "AAA",  "3/15/2017", "11:00", "am");
         assertThat(result.getExitCode(), equalTo(1));
     }
 
     @Test
     public void airlineNamesDontMatchBetweenFileAndCommandLine() {
-        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/data.txt", "Jet Ble", "1", "AAA", "3/15/2017", "10:00",  "AAA",  "3/15/2017", "11:00");
+        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/dta.txt", "Jet Ble", "1", "AAA", "3/15/2017", "10:00", "am", "AAA",  "3/15/2017", "11:00", "am" );
         assertThat(result.getTextWrittenToStandardError(), containsString("Airline name provided does not match that of file."));
         assertThat(result.getExitCode(), equalTo(1));
     }
 
     @Test
     public void whenTextFileProvidedDoesntExistCreateOne() {
-        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/dta.txt", "Airline", "1", "AAA", "3/15/2017", "10:00",  "AAA",  "3/15/2017", "11:00");
+        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/dta.txt", "Airline", "1", "ISP", "3/15/2017", "10:00", "am", "ISP",  "3/15/2017", "11:00", "am");
+        assertThat(result.getExitCode(), equalTo(0));
+    }
+
+    @Test
+    public void passingInLetterForFlightNumberOutputsError() {
+        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/ta.txt", "Airline", "A", "AAA", "3/15/2017", "10:00", "am", "AAA", "3/15/2017", "11:00", "am");
+        assertThat(result.getTextWrittenToStandardError(), containsString("A is incorrectly formatted. A should be an integer"));
+        assertThat(result.getExitCode(), equalTo(1));
+    }
+
+    @Test
+    public void flightTestForDepartAndArrivalTime() {
+        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/dta.txt", "Airline", "1", "AAA", "3/15/2017", "10:00", "am", "AAA", "3/15/2016", "11:00", "am");
+        assertThat(result.getTextWrittenToStandardError(), containsString("Arrival time must be after departure time"));
+        assertThat(result.getExitCode(), equalTo(1));
+    }
+
+    @Test
+    public void whenPrettyPrinterRunsCorrectlyRunPrettyPrinterCorrectly() {
+        MainMethodResult result = invokeMain(Project3.class,"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/nucciotj/ta.txt", "-pretty", "src/test/resources/edu/pdx/cs410J/nucciotj/tat.txt", "Airline", "1", "IND", "3/15/2017", "10:00", "am", "ISP", "3/15/2019", "11:00", "am");
         assertThat(result.getExitCode(), equalTo(0));
     }
 
 }
+

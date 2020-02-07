@@ -37,7 +37,7 @@ public class Project3 {
     try {
 
       int flightNumber = Integer.parseInt(flightNumString);       //Convert flightNum string to integer
-      Flight flight = new Flight(flightNumber, argList.get(2), argList.get(4), argList.get(3), argList.get(5), argList.get(7), argList.get(6));     //Initialize flight
+      Flight flight = new Flight(flightNumber, argList.get(2), argList.get(4), argList.get(5), argList.get(3), argList.get(6), argList.get(8), argList.get(9), argList.get(7));     //Initialize flight
 
       if(optionList.contains("-textFile")) {                  //Textfile option selected
 
@@ -58,14 +58,44 @@ public class Project3 {
 
         dumper.dump(airline);
 
+        if (optionList.contains("-print")) {
+          System.out.println("NEW FLIGHT: ");
+          System.out.println(flight.toString());
+        }
+
+        if(optionList.contains("-pretty")) {
+
+          String filePath2 = optionList.get(optionList.indexOf("-pretty") + 1);
+
+          PrettyPrinter p = new PrettyPrinter(filePath2);
+
+          if(optionList.contains("-")) {
+            p.print(airline);
+          } else {
+            p.dump(airline);
+          }
+        }
+
       } else {
         Airline airline = new Airline(argList.get(0));      //Initialize airline
         airline.addFlight(flight);
+
+
+        if (optionList.contains("-print")) {
+          System.out.println("NEW FLIGHT: ");
+          System.out.println(flight.toString());
+        }
+
+        if(optionList.contains("-pretty")) {
+
+          String filePath = optionList.get(optionList.indexOf("-pretty") + 1);
+
+          PrettyPrinter p = new PrettyPrinter(filePath);
+          p.dump(airline);
+        }
       }
 
-      if (optionList.contains("-print")) {
-        System.out.println(flight.toString());
-      }
+
 
     } catch (NumberFormatException ex) {
       printErrorMessageAndExit(flightNumString + " is incorrectly formatted. " + flightNumString + " should be an integer");
@@ -82,7 +112,7 @@ public class Project3 {
 
   public static void checkForReadMeOption(LinkedList<String> optionList) {
     if (optionList.contains("-README")) {
-      System.out.println("\nThis is a Project 2. The purpose of project 1 is to read in options and arguments from the command line,\n" +
+      System.out.println("\nThis is a Project 3. The purpose of project 1 is to read in options and arguments from the command line,\n" +
               "parse them, construct two objects, and possibly print to standard output if the option is specified. \n" +
               "The program accepts two options: -print and -README. The -README option will print the README associated with \n" +
               "the program and then exit. The -print option will assemble the program objects, and display the data associated with \n" +
@@ -98,13 +128,12 @@ public class Project3 {
     for (int i = 0; i < argList.size(); i++) {                  //Command line parser
 
       if (argList.get(i).matches("-[a-zA-Z0-9]*")) {     //Separate program args from option
-
-//        if(argList.get(i).matches("-textFile") && !argList.get(i + 1).matches("([~]?[/]?[a-zA-Z0-9]*[/]?)*.txt")) {
-//          printErrorMessageAndExit("File path must be provided when using -textFile option.");
-      //}
-        if (argList.get(i).matches("-textFile") && argList.get(i + 1).matches("([~]?[/]?[a-zA-Z0-9]*[/]?)*.[a-zA-Z]*")) {
+        if (argList.get(i).matches("-textFile") || argList.get(i).matches("-pretty")) {
           optionList.add(argList.remove(i));
           optionList.add(argList.remove(i));
+          if(argList.get(i).equals("-")) {
+            optionList.add(argList.remove(i));
+          }
           i -= 1;
         } else {
           optionList.add(argList.remove(i));
@@ -116,7 +145,7 @@ public class Project3 {
 
   public static void checkArgList(LinkedList<String> argList) {       //Function for checking correct number of arguments provided on command line
 
-    if (argList.size() < 8) {          //Test cases for when too few command line arguments are supplied
+    if (argList.size() < 10) {          //Test cases for when too few command line arguments are supplied
       if (argList.size() == 0) {
         printErrorMessageAndExit("Missing command line arguments");
       } else if (argList.size() == 1) {
@@ -134,7 +163,7 @@ public class Project3 {
       } else if (argList.size() == 7) {
         printErrorMessageAndExit("Missing arrival time");
       }
-    } else if(argList.size() > 8) {
+    } else if(argList.size() > 10) {
       printErrorMessageAndExit("Too many arguments supplied for flight");
     }
   }

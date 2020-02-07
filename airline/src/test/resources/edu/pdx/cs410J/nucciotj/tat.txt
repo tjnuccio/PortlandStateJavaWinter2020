@@ -1,0 +1,708 @@
+Airline Name: Airline
+Flight Number: 3
+    Source: Asuncion, Paraguay
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Belfast, Northern Ireland, United Kingdom
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 8
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 9
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 10
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 4
+    Source: Springfield, MO
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Orange County, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 7
+    Source: San Angelo, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Shreveport, LA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 6
+    Source: San Juan, PR
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: San Jose, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 5
+    Source: Sacramento, CA
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Salt Lake City, UT
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: New York, NY (Kennedy)
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 2
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Toledo, OH
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Airline Name: Airline
+Flight Number: 3
+    Source: Asuncion, Paraguay
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Belfast, Northern Ireland, United Kingdom
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 8
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 9
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 10
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 4
+    Source: Springfield, MO
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Orange County, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 7
+    Source: San Angelo, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Shreveport, LA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 6
+    Source: San Juan, PR
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: San Jose, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 5
+    Source: Sacramento, CA
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Salt Lake City, UT
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: New York, NY (Kennedy)
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 2
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Toledo, OH
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Airline Name: Airline
+Flight Number: 3
+    Source: Asuncion, Paraguay
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Belfast, Northern Ireland, United Kingdom
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 8
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 9
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 10
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 4
+    Source: Springfield, MO
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Orange County, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 7
+    Source: San Angelo, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Shreveport, LA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 6
+    Source: San Juan, PR
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: San Jose, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 5
+    Source: Sacramento, CA
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Salt Lake City, UT
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: New York, NY (Kennedy)
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 2
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Toledo, OH
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Airline Name: Airline
+Flight Number: 3
+    Source: Asuncion, Paraguay
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Belfast, Northern Ireland, United Kingdom
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 8
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 9
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 10
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 4
+    Source: Springfield, MO
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Orange County, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 7
+    Source: San Angelo, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Shreveport, LA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 6
+    Source: San Juan, PR
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: San Jose, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 5
+    Source: Sacramento, CA
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Salt Lake City, UT
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: New York, NY (Kennedy)
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 2
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Toledo, OH
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Airline Name: Airline
+Flight Number: 3
+    Source: Asuncion, Paraguay
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Belfast, Northern Ireland, United Kingdom
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 8
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 9
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 10
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 4
+    Source: Springfield, MO
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Orange County, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 7
+    Source: San Angelo, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Shreveport, LA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 6
+    Source: San Juan, PR
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: San Jose, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 5
+    Source: Sacramento, CA
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Salt Lake City, UT
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: New York, NY (Kennedy)
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 2
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Toledo, OH
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Airline Name: Airline
+Flight Number: 3
+    Source: Asuncion, Paraguay
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Belfast, Northern Ireland, United Kingdom
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 8
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 9
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 10
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Indianapolis, IN
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Islip, NY
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 4
+    Source: Springfield, MO
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Orange County, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 7
+    Source: San Angelo, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Shreveport, LA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 6
+    Source: San Juan, PR
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: San Jose, CA
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 5
+    Source: Sacramento, CA
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Salt Lake City, UT
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 1
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: New York, NY (Kennedy)
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins
+Flight Number: 2
+    Source: Wichita Falls, TX
+    Departure Time: 10:00am, on 3/15/2017
+    Destination: Toledo, OH
+    Arrival Time: 11:00am, on 3/15/2019
+    Total Flight Time: 1051260 mins

@@ -49,11 +49,13 @@ public class TextDumper<T extends Airline> implements AirlineDumper<Airline> {
 
         output.append(f.getNumber() + "\n");
         output.append(f.getSource() + "\n");
-        output.append(f.getATimeString() + "\n");
-        output.append(f.getADateString() + "\n");
-        output.append(f.getDestination() + "\n");
-        output.append(f.getDTimeString() + "\n");
         output.append(f.getDDateString() + "\n");
+        output.append(f.getDTimeString() + "\n");
+        output.append(f.getDAMPMString() + "\n");
+        output.append(f.getDestination() + "\n");
+        output.append(f.getADateString() + "\n");
+        output.append(f.getATimeString() + "\n");
+        output.append(f.getAAMPMString() + "\n");
 
         output.close();
 
