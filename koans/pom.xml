@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>PortlandStateJavaWinter2020</artifactId>
-    <groupId>edu.pdx.cs410J.YourUserId</groupId>
+    <groupId>edu.pdx.cs410J.nucciotj</groupId>
     <version>Winter2020</version>
   </parent>
   <groupId>edu.pdx.cs410J.nucciotj</groupId>
