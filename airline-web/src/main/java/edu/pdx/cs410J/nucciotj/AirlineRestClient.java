@@ -1,9 +1,8 @@
 package edu.pdx.cs410J.nucciotj;
 
-import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.web.HttpRequestHelper;
 
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -25,56 +24,52 @@ public class AirlineRestClient extends HttpRequestHelper
      * @param hostName The name of the host
      * @param port The port
      */
-    public AirlineRestClient( String hostName, int port )
-    {
-        this.url = String.format( "http://%s:%d/%s/%s", hostName, port, WEB_APP, SERVLET );
+    public AirlineRestClient(String hostName, int port) {
+        this.url = String.format( "http://%s:%d/%s/%s", hostName, port, WEB_APP, SERVLET);
     }
 
-  /**
-   * Returns all dictionary entries from the server
-   */
-  public Map<String, String> getAllDictionaryEntries() throws IOException {
-    Response response = get(this.url, Map.of());
-    return Messages.parseDictionary(response.getContent());
-  }
+    public String searchFlights(String airlineName, String src, String dest) throws Exception {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("airlineName", airlineName);
+        parameters.put("src", src);
+        parameters.put("dest", dest);
+        Response response = get(this.url, parameters);
+        throwExceptionIfNotOkayHttpStatus(response);
 
-  /**
-   * Returns the definition for the given word
-   */
-  public String getDefinition(String word) throws IOException {
-    Response response = get(this.url, Map.of("word", word));
-    throwExceptionIfNotOkayHttpStatus(response);
-    String content = response.getContent();
-    return Messages.parseDictionaryEntry(content).getValue();
-  }
-
-  public void addDictionaryEntry(String word, String definition) throws IOException {
-    Response response = postToMyURL(Map.of("word", word, "definition", definition));
-    throwExceptionIfNotOkayHttpStatus(response);
-  }
-
-  @VisibleForTesting
-  Response postToMyURL(Map<String, String> dictionaryEntries) throws IOException {
-    return post(this.url, dictionaryEntries);
-  }
-
-  public void removeAllDictionaryEntries() throws IOException {
-    Response response = delete(this.url, Map.of());
-    throwExceptionIfNotOkayHttpStatus(response);
-  }
-
-  private Response throwExceptionIfNotOkayHttpStatus(Response response) {
-    int code = response.getCode();
-    if (code != HTTP_OK) {
-      throw new AirlineRestException(code);
+        return response.getContent();
     }
-    return response;
-  }
 
-  @VisibleForTesting
-  class AirlineRestException extends RuntimeException {
-    AirlineRestException(int httpStatusCode) {
-      super("Got an HTTP Status Code of " + httpStatusCode);
+    public String addAirline(Airline airline, Flight flight) throws Exception {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("airlineName", airline.getName());
+        parameters.put("flightNumber", Integer.toString(flight.getNumber()));
+        parameters.put("src", flight.getSource());
+        parameters.put("departDate", flight.getDDateString());
+        parameters.put("departTime", flight.getDTimeString());
+        parameters.put("departAMPM", flight.getDAMPMString());
+        parameters.put("dest", flight.getDestination());
+        parameters.put("arrivalDate", flight.getADateString());
+        parameters.put("arrivalTime", flight.getATimeString());
+        parameters.put("arrivalAMPM", flight.getAAMPMString());
+
+        Response response = post(this.url, parameters);
+        throwExceptionIfNotOkayHttpStatus(response);
+
+        return response.getContent();
     }
-  }
+
+    public void deleteAllData() throws Exception {
+        Response response = delete(this.url, null);
+        throwExceptionIfNotOkayHttpStatus(response);
+    }
+
+    private Response throwExceptionIfNotOkayHttpStatus(Response response) throws Exception {
+        int code = response.getCode();
+        if (code != HTTP_OK) {
+            throw new Exception("Bad code!");
+        }
+        return response;
+    }
+
+
 }

@@ -3,6 +3,8 @@ package edu.pdx.cs410J.nucciotj;
 import edu.pdx.cs410J.AirlineDumper;
 import org.w3c.dom.*;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletOutputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,6 +30,9 @@ public class XmlDumper<T extends Airline> implements AirlineDumper<Airline> {
     protected final String SYSTEM_ID = "http://www.cs.pdx.edu/~whitlock/dtds/airline.dtd";
     protected final String PUBLIC_ID = "-//Portland State University//DTD CS410J Airline//EN";
 
+    public XmlDumper(ServletOutputStream out) throws IOException {
+        this.output = new PrintWriter(out);
+    }
     /**
      * TextDumper Constructor
      * @param filePath  file supplied on the command line to be written out to

@@ -1,6 +1,6 @@
 package edu.pdx.cs410J.nucciotj;
 
-import com.google.common.annotations.VisibleForTesting;
+import edu.pdx.cs410J.AirportNames;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This servlet ultimately provides a REST API for working with an
@@ -18,130 +18,11 @@ import java.util.Map;
  * and their definitions.
  */
 public class AirlineServlet extends HttpServlet {
-  static final String WORD_PARAMETER = "word";
-  static final String DEFINITION_PARAMETER = "definition";
+  static final String AIRLINE_NAME_PARAMETER = "airline";
+  static final String SRC_PARAMETER = "src";
+  static final String DEST_PARAMETER = "dest";
 
-  private final Map<String, String> dictionary = new HashMap<>();
-
-  /**
-   * Handles an HTTP GET request from a client by writing the definition of the
-   * word specified in the "word" HTTP parameter to the HTTP response.  If the
-   * "word" parameter is not specified, all of the entries in the dictionary
-   * are written to the HTTP response.
-   */
-  @Override
-  protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
-  {
-      response.setContentType( "text/plain" );
-
-      String word = getParameter( WORD_PARAMETER, request );
-      if (word != null) {
-          writeDefinition(word, response);
-
-      } else {
-          writeAllDictionaryEntries(response);
-      }
-  }
-
-  /**
-   * Handles an HTTP POST request by storing the dictionary entry for the
-   * "word" and "definition" request parameters.  It writes the dictionary
-   * entry to the HTTP response.
-   */
-  @Override
-  protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
-  {
-      response.setContentType( "text/plain" );
-
-      String word = getParameter(WORD_PARAMETER, request );
-      if (word == null) {
-          missingRequiredParameter(response, WORD_PARAMETER);
-          return;
-      }
-
-      String definition = getParameter(DEFINITION_PARAMETER, request );
-      if ( definition == null) {
-          missingRequiredParameter( response, DEFINITION_PARAMETER );
-          return;
-      }
-
-      this.dictionary.put(word, definition);
-
-      PrintWriter pw = response.getWriter();
-      pw.println(Messages.definedWordAs(word, definition));
-      pw.flush();
-
-      response.setStatus( HttpServletResponse.SC_OK);
-  }
-
-  /**
-   * Handles an HTTP DELETE request by removing all dictionary entries.  This
-   * behavior is exposed for testing purposes only.  It's probably not
-   * something that you'd want a real application to expose.
-   */
-  @Override
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      response.setContentType("text/plain");
-
-      this.dictionary.clear();
-
-      PrintWriter pw = response.getWriter();
-      pw.println(Messages.allDictionaryEntriesDeleted());
-      pw.flush();
-
-      response.setStatus(HttpServletResponse.SC_OK);
-
-  }
-
-  /**
-   * Writes an error message about a missing parameter to the HTTP response.
-   *
-   * The text of the error message is created by {@link Messages#missingRequiredParameter(String)}
-   */
-  private void missingRequiredParameter( HttpServletResponse response, String parameterName )
-      throws IOException
-  {
-      String message = Messages.missingRequiredParameter(parameterName);
-      response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
-  }
-
-  /**
-   * Writes the definition of the given word to the HTTP response.
-   *
-   * The text of the message is formatted with
-   * {@link Messages#formatDictionaryEntry(String, String)}
-   */
-  private void writeDefinition(String word, HttpServletResponse response) throws IOException {
-    String definition = this.dictionary.get(word);
-
-    if (definition == null) {
-      response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-
-    } else {
-      PrintWriter pw = response.getWriter();
-      pw.println(Messages.formatDictionaryEntry(word, definition));
-
-      pw.flush();
-
-      response.setStatus(HttpServletResponse.SC_OK);
-    }
-  }
-
-  /**
-   * Writes all of the dictionary entries to the HTTP response.
-   *
-   * The text of the message is formatted with
-   * {@link Messages#formatDictionaryEntry(String, String)}
-   */
-  private void writeAllDictionaryEntries(HttpServletResponse response ) throws IOException
-  {
-      PrintWriter pw = response.getWriter();
-      Messages.formatDictionaryEntries(pw, dictionary);
-
-      pw.flush();
-
-      response.setStatus( HttpServletResponse.SC_OK );
-  }
+  private final Map<String, Airline> airlines = new HashMap<>();
 
   /**
    * Returns the value of the HTTP request parameter with the given name.
@@ -150,17 +31,256 @@ public class AirlineServlet extends HttpServlet {
    *         <code>null</code> or is the empty string
    */
   private String getParameter(String name, HttpServletRequest request) {
-    String value = request.getParameter(name);
-    if (value == null || "".equals(value)) {
-      return null;
+      String value = request.getParameter(name);
+      if (value == null || "".equals(value)) {
+          return null;
+      } else {
+          return value;
+      }
+  }
+  /**
+   * Handles an HTTP GET request from a client by writing the definition of the
+   * word specified in the "word" HTTP parameter to the HTTP response.  If the
+   * "word" parameter is not specified, all of the entries in the dictionary
+   * are written to the HTTP response.
+   */
+  @Override
+  protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+      response.setContentType( "text/plain" );
 
-    } else {
-      return value;
+      String airlineName = getParameter(AIRLINE_NAME_PARAMETER, request);
+      String src = getParameter(SRC_PARAMETER, request);
+      String dest = getParameter(DEST_PARAMETER, request);
+
+      PrintWriter pw = response.getWriter();
+
+      if(airlineName == null) {
+          response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Airline name not supplied.");
+          return;
+      } else if(src == null && dest != null) {
+          response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Source airport code was not supplied.");
+          return;
+      } else if(dest == null && src != null) {
+          response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Destination airport code was not supplied.");
+          return;
+      }
+
+      if(airlineName != null && src == null && dest == null) {
+          if (airlines.isEmpty()) {
+              pw.println("Airline does not exist.");
+              pw.flush();
+              return;
+          } else if (airlineName == null && src == null && dest == null && !airlines.isEmpty()) {
+              writeAllFlightsToResponse(response);
+              return;
+          } else if (airlineName != null && src == null && dest == null) {
+              if (airlines.containsKey(airlineName)) {
+                  Airline airline = airlines.get(airlineName);
+                  XmlDumper dump = new XmlDumper(response.getOutputStream());
+                  dump.dump(airline);
+                  return;
+              } else {
+                  pw.println("Airline not on server!");
+                  return;
+              }
+          }
+      } else if(airlineName != null && src != null && dest != null) {
+
+          if(airlines.containsKey(airlineName)) {
+
+
+              if (src.length() != 3) {
+                  response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Flight source should be a three-letter code.");
+                  return;
+              } else if (src.matches(".*\\d.*")) {
+                  response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, src + " contains integer values. Should be three-letter code.");
+                  return;
+              } else if (AirportNames.getName(src) == null) {
+                  response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Airport " + src + " has not been found to be a valid airport. Flight has not been added.");
+                  return;
+              }
+
+              if (dest.length() != 3) {
+                  response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Flight destination should be a three-letter code.");
+                  return;
+              } else if (dest.matches(".*\\d.*")) {
+                  response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, dest + " contains integer values. Should be three-letter code.");
+                  return;
+              } else if (AirportNames.getName(dest) == null) {
+                  response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Airport " + dest + " has not been found to be a valid airport.");
+                  return;
+              }
+
+              Airline airline = airlines.get(airlineName);
+              List<Flight> list = new ArrayList<>(airline.getFlights());
+
+              Airline temp = new Airline(airlineName);
+
+              for (int i = 0; i < list.size(); i++) {
+                  if (list.get(i).getSource().equals(src) && list.get(i).getDestination().equals(dest)) {
+                      temp.addFlight(list.get(i));
+                  }
+              }
+
+              if(temp.getFlights().size() > 0) {
+                  XmlDumper dump = new XmlDumper(response.getOutputStream());
+                  dump.dump(temp);
+                  return;
+              } else {
+                  pw.println("Flights starting at " + src + " and ending at " + dest + " were not found for airline " + airlineName + ".");
+                  return;
+              }
+          } else {
+              pw.println("Airline is not on server.");
+              return;
+          }
+
+      }
+  }
+  /**
+   * Handles an HTTP POST request by storing the dictionary entry for the
+   * "word" and "definition" request parameters.  It writes the dictionary
+   * entry to the HTTP response.
+   */
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      response.setContentType("text/plain");
+
+      String airlineName = getParameter("airlineName", request);
+      String flightNumber = getParameter("flightNumber", request);
+      String src = getParameter("src", request);
+      String departDate = getParameter("departDate", request);
+      String departTime = getParameter("departTime", request);
+      String departAMPM = getParameter("departAMPM", request);
+      String dest = getParameter("dest", request);
+      String arrivalDate = getParameter("arrivalDate", request);
+      String arrivalTime = getParameter("arrivalTime", request);
+      String arrivalAMPM = getParameter("arrivalAMPM", request);
+
+      int flightNum;
+
+      if (airlineName == null) {
+          missingRequiredParameter(response, "airlineName");
+          return;
+      } else if(src == null) {
+          missingRequiredParameter(response, "src");
+          return;
+      } else if(departDate == null) {
+          missingRequiredParameter(response, "departDate");
+          return;
+      } else if(departTime == null) {
+          missingRequiredParameter(response, "departTime");
+          return;
+      } else if(departAMPM == null) {
+          missingRequiredParameter(response, "departAMPM");
+          return;
+      } else if(dest == null) {
+          missingRequiredParameter(response, "dest");
+          return;
+      } else if(arrivalDate == null) {
+          missingRequiredParameter(response, "arrivalDate");
+          return;
+      } else if(arrivalTime == null) {
+          missingRequiredParameter(response, "arrivalTime");
+          return;
+      } else if(arrivalAMPM == null) {
+          missingRequiredParameter(response, "arrivalAMPM");
+          return;
+      }
+
+      try {
+          flightNum = Integer.parseInt(flightNumber);
+
+          Flight flight = new Flight(flightNum, src, departTime, departDate, departAMPM, dest, arrivalTime, arrivalAMPM, arrivalDate);
+
+          if(airlines.containsKey(airlineName)) {
+              airlines.get(airlineName).addFlight(flight);
+          } else {
+              Airline airline = new Airline(airlineName);
+              airline.addFlight(flight);
+              airlines.put(airlineName, airline);
+          }
+
+          PrintWriter pw = response.getWriter();
+          pw.println();
+          pw.println("Airline " + airlineName + " had been updated with flight " + flightNumber);
+          pw.flush();
+          response.setStatus( HttpServletResponse.SC_OK);
+          return;
+
+      } catch (NumberFormatException e) {
+          response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, "Flight num must be integer");
+          return;
+      } catch (IllegalArgumentException e) {
+          response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, e.getMessage());
+          return;
+      } catch (Exception e) {
+          response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, e.getMessage());
+          return;
+      }
+  }
+
+    private void missingRequiredParameter(HttpServletResponse response, String parameterName) throws IOException {
+
+      String message = "Missing required parameter: " + parameterName;
+      response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
+      return;
+
     }
+
+    private void writeAllFlightsToResponse(HttpServletResponse response ) throws IOException {
+      PrintWriter pw = response.getWriter();
+
+      for(String key : airlines.keySet()) {
+
+          List<Flight> list = new ArrayList<>(airlines.get(key).getFlights());
+
+          Collections.sort(list);
+
+          pw.println("Airline Name: " + key + "\n");
+          for(int i = 0; i < list.size(); i++) {
+
+              Flight flight = list.get(i);
+
+              if(AirportNames.getName(flight.getSource()) == null) {
+                  throw new IllegalArgumentException("Airport " + flight.getSource() + " has not been found to be a valid airport.");
+              } else if (AirportNames.getName(flight.getDestination()) == null) {
+                  throw new IllegalArgumentException("Airport " + flight.getDestination() + " has not been found to be a valid airport.");
+              }
+
+              long diffInMillies = Math.abs(flight.getArrival().getTime() - flight.getDeparture().getTime());
+              long diff = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+              pw.println("Flight Number: " + flight.getNumber() + "\n");
+              pw.println("    Source: " + AirportNames.getName(flight.getSource()) + "\n");
+              pw.println("    Departure Time: " + flight.getDTimeString() + flight.getDAMPMString() + ", on " + flight.getDDateString() + "\n");
+              pw.println("    Destination: " + AirportNames.getName(flight.getDestination()) + "\n");
+              pw.println("    Arrival Time: " + flight.getATimeString() + flight.getAAMPMString() + ", on " + flight.getADateString() + "\n");
+              pw.println("    Total Flight Time: " + diff + " mins" + "\n");
+
+          }
+      }
+
+      pw.close();
+
+      response.setStatus( HttpServletResponse.SC_OK );
+  }
+    /**
+   * Handles an HTTP DELETE request by removing all dictionary entries.  This
+   * behavior is exposed for testing purposes only.  It's probably not
+   * something that you'd want a real application to expose.
+   */
+  @Override
+  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      response.setContentType("text/plain");
+
+      this.airlines.clear();
+
+      PrintWriter pw = response.getWriter();
+      pw.println("Deleted all airlines + flights");
+      pw.flush();
+
+      response.setStatus(HttpServletResponse.SC_OK);
   }
 
-  @VisibleForTesting
-  String getDefinition(String word) {
-      return this.dictionary.get(word);
-  }
 }

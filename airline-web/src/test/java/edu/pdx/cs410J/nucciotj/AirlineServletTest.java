@@ -18,26 +18,29 @@ import static org.mockito.Mockito.*;
  */
 public class AirlineServletTest {
 
-  @Test
-  public void addOneWordToDictionary() throws ServletException, IOException {
-    AirlineServlet servlet = new AirlineServlet();
-
-    String word = "TEST WORD";
-    String definition = "TEST DEFINITION";
-
-    HttpServletRequest request = mock(HttpServletRequest.class);
-    when(request.getParameter("word")).thenReturn(word);
-    when(request.getParameter("definition")).thenReturn(definition);
-
-    HttpServletResponse response = mock(HttpServletResponse.class);
-    PrintWriter pw = mock(PrintWriter.class);
-
-    when(response.getWriter()).thenReturn(pw);
-
-    servlet.doPost(request, response);
-    verify(pw).println(Messages.definedWordAs(word, definition));
-    verify(response).setStatus(HttpServletResponse.SC_OK);
-
-    assertThat(servlet.getDefinition(word), equalTo(definition));
-  }
+//  @Test
+//  public void addFlightStoresAirlineWithFlight() throws ServletException, IOException {
+//    AirlineServlet servlet = new AirlineServlet();
+//
+//    String airlineName = "TEST AIRLINE";
+//    int flightNumber = 123;
+//
+//    HttpServletRequest request = mock(HttpServletRequest.class);
+//    when(request.getParameter("airline")).thenReturn(airlineName);
+//    when(request.getParameter("flightNumber")).thenReturn(Integer.toString(flightNumber));
+//
+//    HttpServletResponse response = mock(HttpServletResponse.class);
+//    PrintWriter pw = mock(PrintWriter.class);
+//
+//    when(response.getWriter()).thenReturn(pw);
+//
+//    servlet.doPost(request, response);
+//
+//    Airline<Flight> airline = servlet.getAirline(airlineName);
+//    assertThat(airline, isNotNull());
+//
+//    Flight flight = airline.getFlights().iterator().next();
+//    assertThat(flight.getNumber(), equalTo(flightNumber));
+//
+//  }
 }

@@ -3,6 +3,8 @@ package edu.pdx.cs410J.nucciotj;
 import edu.pdx.cs410J.AirlineDumper;
 import edu.pdx.cs410J.AirportNames;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +15,7 @@ public class PrettyPrinter<T extends Airline> implements AirlineDumper<Airline> 
 
     private File file;
     private Writer output;
+    private HttpServletResponse response;
 
     /**
      * PrettyPrinter will write out to a file the airline name and all relevant flight information
@@ -23,6 +26,10 @@ public class PrettyPrinter<T extends Airline> implements AirlineDumper<Airline> 
     PrettyPrinter(String filePath) throws IOException {
         this.file = new File(filePath);
         this.output = new BufferedWriter(new FileWriter(this.file, true));
+    }
+
+    PrettyPrinter(HttpServletResponse response) {
+        this.response = response;
     }
 
     /**
