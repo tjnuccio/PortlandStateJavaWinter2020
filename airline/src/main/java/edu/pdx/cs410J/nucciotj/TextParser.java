@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.nucciotj;
 
 import edu.pdx.cs410J.AirlineParser;
+import edu.pdx.cs410J.AirportNames;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
@@ -54,10 +55,12 @@ public class TextParser implements AirlineParser {
 
             String fileAirlineName = list.get(0);
 
-            Airline airline = new Airline(airlineName);                             //Test against command line airline name
+            Airline airline = new Airline(fileAirlineName);                             //Test against command line airline name
 
-            if (!airline.getName().equals(fileAirlineName)) {
-                throw new ParserException("Airline name provided does not match that of file.");
+            if(airlineName != null) {
+                if (!airline.getName().equals(airlineName)) {
+                    throw new ParserException("Airline name provided does not match that of file.");
+                }
             }
 
             for (int i = 1; i < list.size(); i += 9) {
@@ -74,6 +77,10 @@ public class TextParser implements AirlineParser {
                     throw new ParserException("Airport code incorrectly formatted in file. Airport codes should not contain digits.");
                 }
 
+                if(AirportNames.getName(list.get(i + 1)) == null || AirportNames.getName(list.get(i + 5)) == null) {
+                    throw new IllegalArgumentException("Airport code in file has been found to be an invalid airport.");
+                }
+
                 if (!list.get(i + 2).matches("\\d\\d?/\\d\\d?/\\d\\d\\d\\d") || !list.get(i + 6).matches("\\d\\d?/\\d\\d?/\\d\\d\\d\\d")) {                //Dates
                     throw new ParserException("Date incorrectly formatted in file. Should be of format: mm/dd/yyyy");
                 }
@@ -81,10 +88,6 @@ public class TextParser implements AirlineParser {
                 if (!list.get(i + 3).matches("\\d\\d?:\\d\\d") || !list.get(i + 7).matches("\\d\\d?:\\d\\d")) {
                     throw new ParserException("Time is incorrectly formatted in file. Should be of format: mm:hh");
                 }
-
-//                if (!list.get(i + 3).matches("am") || !list.get(i + 7).matches("AM") || !list.get(i + 3).matches("pm") || !list.get(i + 7).matches("PM")) {
-//                    throw new ParserException("am / pm incorrectly formatted in file. ");
-//                }
 
                 Flight flight = new Flight(Integer.parseInt(list.get(i)), list.get(i + 1), list.get(i + 3), list.get(i + 4), list.get(i + 2), list.get(i + 5), list.get(i + 7), list.get(i + 8), list.get(i + 6));
                 airline.addFlight(flight);

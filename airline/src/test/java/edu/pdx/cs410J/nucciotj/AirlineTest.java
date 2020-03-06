@@ -28,14 +28,14 @@ public class AirlineTest {
 
     @Test
     public void addFlightToAirline() {
-        Flight flight = new Flight(111, "AAA", "10:00", "am", "3/15/2017", "AAA", "11:00", "am", "3/15/2017");
+        Flight flight = new Flight(111, "DRO", "10:00", "am", "3/15/2017", "CWA", "11:00", "am", "3/15/2017");
         Airline<Flight> airline = new Airline<>("Jet Blue");
         airline.addFlight(flight);
     }
 
     @Test
     public void whenAddingOneFlightCheckThatGetFlightsSizeEqualsOne() {
-        Flight flight = new Flight(111, "AAA", "10:00", "am", "3/15/2017", "AAA", "11:00", "am", "3/15/2017");
+        Flight flight = new Flight(111, "DRO", "10:00", "am", "3/15/2017", "CWA", "11:00", "am", "3/15/2017");
         Airline<Flight> airline = new Airline<>("Jet Blue");
         airline.addFlight(flight);
 
@@ -45,7 +45,7 @@ public class AirlineTest {
 
     @Test
     public void afterAddingFlightToAirlineUseGetFlightsMethodAndCheckFlightMatchesWhatWasAdded() {
-        Flight flight = new Flight(111, "AAA", "10:00", "am", "3/15/2017", "AAA", "11:00", "am", "3/15/2017");
+        Flight flight = new Flight(111, "DRO", "10:00", "am", "3/15/2017", "CWA", "11:00", "am", "3/15/2017");
         Airline<Flight> airline = new Airline<>("Jet Blue");
         airline.addFlight(flight);
 

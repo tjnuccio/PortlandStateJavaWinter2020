@@ -1,0 +1,37 @@
+Airline Name: Project3
+Flight Number: 200
+    Source: Wausau/Stevens Point, WI
+    Departure Time: 12:14pm, on 01/03/2020
+    Destination: Durango, CO
+    Arrival Time: 2:45pm, on 01/13/2020
+    Total Flight Time: 45569 mins
+Flight Number: 300
+    Source: Evansville, IN
+    Departure Time: 9:00am, on 03/04/2020
+    Destination: Chicago, IL (O'Hare)
+    Arrival Time: 7:00pm, on 03/05/2020
+    Total Flight Time: 43560 mins
+Flight Number: 400
+    Source: Evansville, IN
+    Departure Time: 12:36pm, on 03/04/2020
+    Destination: Lafayette, LA
+    Arrival Time: 8:19pm, on 03/05/2020
+    Total Flight Time: 22577 mins
+Flight Number: 1000
+    Source: Harlingen, TX
+    Departure Time: 9:00am, on 01/09/2020
+    Destination: Fresno, CA
+    Arrival Time: 6:28pm, on 01/09/2020
+    Total Flight Time: 36208 mins
+Flight Number: 1200
+    Source: Lincoln, NE
+    Departure Time: 10:00am, on 01/10/2020
+    Destination: Mcallen, TX
+    Arrival Time: 12:16pm, on 01/10/2020
+    Total Flight Time: 72136 mins
+Flight Number: 1200
+    Source: Lincoln, NE
+    Departure Time: 10:00am, on 01/10/2020
+    Destination: Mcallen, TX
+    Arrival Time: 12:16pm, on 01/10/2020
+    Total Flight Time: 72136 mins

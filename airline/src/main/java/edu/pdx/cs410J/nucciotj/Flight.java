@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.nucciotj;
 
 import edu.pdx.cs410J.AbstractFlight;
+import edu.pdx.cs410J.AirportNames;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -67,6 +68,10 @@ public class Flight extends AbstractFlight implements Comparable<Flight> {
       this.flightSrc = flightSrc;
     }
 
+    if(AirportNames.getName(flightSrc) == null) {
+      throw new IllegalArgumentException("Airport " + flightSrc + " has not been found to be a valid airport. Flight has not been added.");
+    }
+
     //Flight destination
     if(flightDest.length() != 3) {
       throw new IllegalArgumentException("Flight destination should be three-letter code.");
@@ -74,6 +79,10 @@ public class Flight extends AbstractFlight implements Comparable<Flight> {
       throw new IllegalArgumentException(flightDest + " contains integer values. Should be three-letter code.");
     } else {
       this.flightDest = flightDest;
+    }
+
+    if(AirportNames.getName(flightDest) == null) {
+      throw new IllegalArgumentException("Airport " + flightDest + " has not been found to be a valid airport. Flight has not been added.");
     }
 
     //Arrival date                                                                         //Flight arrival date + time
@@ -124,7 +133,7 @@ public class Flight extends AbstractFlight implements Comparable<Flight> {
     }
 
     if(arrivalDate.compareTo(departDate) < 0) {
-      throw new IllegalArgumentException("Arrival time must be after departure time.");
+      throw new IllegalArgumentException("Departure time must be before arrival time.");
     }
 
   }

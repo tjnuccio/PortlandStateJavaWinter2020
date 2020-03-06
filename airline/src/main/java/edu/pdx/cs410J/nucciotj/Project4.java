@@ -18,7 +18,7 @@ import java.util.LinkedList;
  *
  * Command Line Args: (int flightNum, String sourceDestination, String departTime, String departDate, String arrivalDestination, String arrivalTime, String arrivalDate)
  */
-public class Project3 {
+public class Project4 {
 
   private static LinkedList<String> argList;
   private static LinkedList<String> optionList;
@@ -76,13 +76,49 @@ public class Project3 {
           }
         }
 
+      } else if(optionList.contains("-xmlFile")) {                  //XmlFile option selected
+
+        String filePath = optionList.get(optionList.indexOf("-xmlFile") + 1);
+
+        XmlParser parser = new XmlParser(filePath, argList.get(0));       //Call parser, add airline, then dump
+        Airline airline = parser.parse();
+
+        if(airline != null) {
+          airline.addFlight(flight);
+        } else {
+          File file = new File(filePath);
+          file.createNewFile();
+          airline = new Airline(argList.get(0));
+          airline.addFlight(flight);
+        }
+
+        XmlDumper dumper = new XmlDumper(filePath);
+        dumper.dump(airline);
+
+        if (optionList.contains("-print")) {
+          System.out.println("NEW FLIGHT: ");
+          System.out.println(flight.toString());
+        }
+
+        if(optionList.contains("-pretty")) {
+
+          String filePath2 = optionList.get(optionList.indexOf("-pretty") + 1);
+
+          PrettyPrinter p = new PrettyPrinter(filePath2);
+
+          if(optionList.contains("-")) {
+            p.print(airline);
+          } else {
+            p.dump(airline);
+          }
+        }
+
       } else {
         Airline airline = new Airline(argList.get(0));      //Initialize airline
         airline.addFlight(flight);
 
 
         if (optionList.contains("-print")) {
-          System.out.println("NEW FLIGHT: ");
           System.out.println(flight.toString());
         }
 
@@ -105,6 +141,8 @@ public class Project3 {
       printErrorMessageAndExit(e.getMessage());
     } catch (ParserException e) {
       printErrorMessageAndExit(e.getMessage());
+    } catch (NullPointerException e) {
+      printErrorMessageAndExit(e.getMessage());
     }
 
     System.exit(0);
@@ -112,7 +150,7 @@ public class Project3 {
 
   public static void checkForReadMeOption(LinkedList<String> optionList) {
     if (optionList.contains("-README")) {
-      System.out.println("\nThis is a Project 3. The purpose of project 1 is to read in options and arguments from the command line,\n" +
+      System.out.println("\nThis is a Project 4. The purpose of project 1 is to read in options and arguments from the command line,\n" +
               "parse them, construct two objects, and possibly print to standard output if the option is specified. \n" +
               "The program accepts two options: -print and -README. The -README option will print the README associated with \n" +
               "the program and then exit. The -print option will assemble the program objects, and display the data associated with \n" +
@@ -128,7 +166,7 @@ public class Project3 {
     for (int i = 0; i < argList.size(); i++) {                  //Command line parser
 
       if (argList.get(i).matches("-[a-zA-Z0-9]*")) {     //Separate program args from option
-        if (argList.get(i).matches("-textFile") || argList.get(i).matches("-pretty")) {
+        if (argList.get(i).matches("-textFile") || argList.get(i).matches("-pretty") || argList.get(i).matches("-xmlFile")) {
           optionList.add(argList.remove(i));
           optionList.add(argList.remove(i));
           if(argList.get(i).equals("-")) {
@@ -140,6 +178,10 @@ public class Project3 {
           i--;
         }                   //Readjust index for removed element
       }
+    }
+
+    if(optionList.contains("-textFile") && optionList.contains("-xmlFile")) {
+      throw new IllegalArgumentException("Error: -textFile and -xmlFile options cannot be used simultaneously.");
     }
   }
 
@@ -157,11 +199,15 @@ public class Project3 {
       } else if (argList.size() == 4) {
         printErrorMessageAndExit("Missing departure time");
       } else if (argList.size() == 5) {
-        printErrorMessageAndExit("Missing arrival destination");
+        printErrorMessageAndExit("Missing departure time am/pm");
       } else if (argList.size() == 6) {
-        printErrorMessageAndExit("Missing arrival date");
+        printErrorMessageAndExit("Missing arrival airport");
       } else if (argList.size() == 7) {
+        printErrorMessageAndExit("Missing arrival date");
+      } else if (argList.size() == 8) {
         printErrorMessageAndExit("Missing arrival time");
+      } else if (argList.size() == 9) {
+        printErrorMessageAndExit("Missing arrival time am/pm");
       }
     } else if(argList.size() > 10) {
       printErrorMessageAndExit("Too many arguments supplied for flight");
