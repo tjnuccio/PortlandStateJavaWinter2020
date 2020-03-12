@@ -18,8 +18,8 @@ import static org.mockito.Mockito.*;
  */
 public class AirlineServletTest {
 
-//  @Test
-//  public void addFlightStoresAirlineWithFlight() throws ServletException, IOException {
+  @Test
+  public void addFlightStoresAirlineWithFlight() throws ServletException, IOException {
 //    AirlineServlet servlet = new AirlineServlet();
 //
 //    String airlineName = "TEST AIRLINE";
@@ -41,6 +41,6 @@ public class AirlineServletTest {
 //
 //    Flight flight = airline.getFlights().iterator().next();
 //    assertThat(flight.getNumber(), equalTo(flightNumber));
-//
-//  }
+
+  }
 }

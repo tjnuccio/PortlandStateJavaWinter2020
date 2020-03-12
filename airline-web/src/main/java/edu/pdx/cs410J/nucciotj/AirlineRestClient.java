@@ -28,20 +28,41 @@ public class AirlineRestClient extends HttpRequestHelper
         this.url = String.format( "http://%s:%d/%s/%s", hostName, port, WEB_APP, SERVLET);
     }
 
+    /**
+     * The searchFlights method will retrieve an airline and its flights from the server.
+     * If found, it will send back to main the xml string containing the airline and all
+     * of its flights.
+     * @param airlineName   airline name to search for
+     * @param src           flight source
+     * @param dest          flight destination
+     * @return              string containing xml to be parsed by main class
+     * @throws Exception
+     */
     public String searchFlights(String airlineName, String src, String dest) throws Exception {
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("airlineName", airlineName);
-        parameters.put("src", src);
-        parameters.put("dest", dest);
+        parameters.put("airline", airlineName);
+        if(src != null && dest != null) {
+            parameters.put("src", src);
+            parameters.put("dest", dest);
+        }
         Response response = get(this.url, parameters);
+
         throwExceptionIfNotOkayHttpStatus(response);
 
         return response.getContent();
     }
 
+    /**
+     * The add airline method will add an airline to the server. If an airline
+     * is already on the server, it will add the flight to the airline.
+     * @param airline   name of airline
+     * @param flight    flight to be added to airline
+     * @return          string containing reponse message
+     * @throws Exception
+     */
     public String addAirline(Airline airline, Flight flight) throws Exception {
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("airlineName", airline.getName());
+        parameters.put("airline", airline.getName());
         parameters.put("flightNumber", Integer.toString(flight.getNumber()));
         parameters.put("src", flight.getSource());
         parameters.put("departDate", flight.getDDateString());
@@ -58,17 +79,29 @@ public class AirlineRestClient extends HttpRequestHelper
         return response.getContent();
     }
 
-    public void deleteAllData() throws Exception {
-        Response response = delete(this.url, null);
-        throwExceptionIfNotOkayHttpStatus(response);
-    }
-
-    private Response throwExceptionIfNotOkayHttpStatus(Response response) throws Exception {
+    /**
+     * Method to check http response code
+     * @param response
+     * @return
+     */
+    private Response throwExceptionIfNotOkayHttpStatus(Response response) {
         int code = response.getCode();
         if (code != HTTP_OK) {
-            throw new Exception("Bad code!");
+            if (response.getContent() != null) {
+                throw new AirlineRestException(code, response.getContent());
+            }
+            throw new AirlineRestException(code);
         }
         return response;
+    }
+
+    class AirlineRestException extends RuntimeException {
+        AirlineRestException(int httpStatusCode) {
+            super("Got an HTTP Status Code of " + httpStatusCode);
+        }
+        AirlineRestException(int httpStatusCode, String message) {
+            super("Got an HTTP Status Code of " + httpStatusCode + ". Reason: " + message);
+        }
     }
 
 

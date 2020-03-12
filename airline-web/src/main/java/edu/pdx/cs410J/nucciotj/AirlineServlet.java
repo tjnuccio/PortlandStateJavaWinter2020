@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * @author TJ Nuccio
  * This servlet ultimately provides a REST API for working with an
  * <code>Airline</code>.  However, in its current state, it is an example
  * of how to use HTTP and Java servlets to store simple dictionary of words
@@ -45,7 +46,7 @@ public class AirlineServlet extends HttpServlet {
    * are written to the HTTP response.
    */
   @Override
-  protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
       response.setContentType( "text/plain" );
 
       String airlineName = getParameter(AIRLINE_NAME_PARAMETER, request);
@@ -65,25 +66,27 @@ public class AirlineServlet extends HttpServlet {
           return;
       }
 
-      if(airlineName != null && src == null && dest == null) {
+      if(src == null && dest == null) {
           if (airlines.isEmpty()) {
-              pw.println("Airline does not exist.");
+              pw.println("No airlines currently on server.");
               pw.flush();
               return;
-          } else if (airlineName == null && src == null && dest == null && !airlines.isEmpty()) {
-              writeAllFlightsToResponse(response);
-              return;
-          } else if (airlineName != null && src == null && dest == null) {
-              if (airlines.containsKey(airlineName)) {
+          } else {
+              if(airlines.containsKey(airlineName)) {
                   Airline airline = airlines.get(airlineName);
-                  XmlDumper dump = new XmlDumper(response.getOutputStream());
-                  dump.dump(airline);
+                  XmlDumper dumper = new XmlDumper(response.getWriter());
+                  dumper.dump(airline);
                   return;
-              } else {
-                  pw.println("Airline not on server!");
+              }
+
+              if(!airlines.containsKey(airlineName)){
+                  pw.println("Airline not found on server.");
+                  pw.flush();
                   return;
               }
           }
+          return;
+
       } else if(airlineName != null && src != null && dest != null) {
 
           if(airlines.containsKey(airlineName)) {
@@ -123,15 +126,17 @@ public class AirlineServlet extends HttpServlet {
               }
 
               if(temp.getFlights().size() > 0) {
-                  XmlDumper dump = new XmlDumper(response.getOutputStream());
-                  dump.dump(temp);
+                  XmlDumper dumper = new XmlDumper(response.getWriter());
+                  dumper.dump(temp);
                   return;
               } else {
                   pw.println("Flights starting at " + src + " and ending at " + dest + " were not found for airline " + airlineName + ".");
+                  pw.flush();
                   return;
               }
           } else {
               pw.println("Airline is not on server.");
+              pw.flush();
               return;
           }
 
@@ -146,7 +151,7 @@ public class AirlineServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       response.setContentType("text/plain");
 
-      String airlineName = getParameter("airlineName", request);
+      String airlineName = getParameter("airline", request);
       String flightNumber = getParameter("flightNumber", request);
       String src = getParameter("src", request);
       String departDate = getParameter("departDate", request);
@@ -191,21 +196,24 @@ public class AirlineServlet extends HttpServlet {
       try {
           flightNum = Integer.parseInt(flightNumber);
 
-          Flight flight = new Flight(flightNum, src, departTime, departDate, departAMPM, dest, arrivalTime, arrivalAMPM, arrivalDate);
+          PrintWriter pw = response.getWriter();
+          Flight flight = new Flight(flightNum, src, departTime, departAMPM, departDate, dest, arrivalTime, arrivalAMPM, arrivalDate);
 
           if(airlines.containsKey(airlineName)) {
               airlines.get(airlineName).addFlight(flight);
+              pw.println();
+              pw.println("Airline " + airlineName + " had been updated with flight " + flightNumber);
+              pw.flush();
           } else {
               Airline airline = new Airline(airlineName);
               airline.addFlight(flight);
               airlines.put(airlineName, airline);
+              pw.println();
+              pw.println("Airline " + airlineName + " has been added to server with flight " + flightNumber);
+              pw.flush();
           }
 
-          PrintWriter pw = response.getWriter();
-          pw.println();
-          pw.println("Airline " + airlineName + " had been updated with flight " + flightNumber);
-          pw.flush();
-          response.setStatus( HttpServletResponse.SC_OK);
+          response.setStatus(HttpServletResponse.SC_OK);
           return;
 
       } catch (NumberFormatException e) {
@@ -228,7 +236,7 @@ public class AirlineServlet extends HttpServlet {
 
     }
 
-    private void writeAllFlightsToResponse(HttpServletResponse response ) throws IOException {
+    private void writeAllFlightsToResponse(HttpServletResponse response) throws IOException {
       PrintWriter pw = response.getWriter();
 
       for(String key : airlines.keySet()) {
@@ -260,27 +268,25 @@ public class AirlineServlet extends HttpServlet {
 
           }
       }
-
       pw.close();
-
-      response.setStatus( HttpServletResponse.SC_OK );
+      response.setStatus(HttpServletResponse.SC_OK);
   }
     /**
    * Handles an HTTP DELETE request by removing all dictionary entries.  This
    * behavior is exposed for testing purposes only.  It's probably not
    * something that you'd want a real application to expose.
    */
-  @Override
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      response.setContentType("text/plain");
-
-      this.airlines.clear();
-
-      PrintWriter pw = response.getWriter();
-      pw.println("Deleted all airlines + flights");
-      pw.flush();
-
-      response.setStatus(HttpServletResponse.SC_OK);
-  }
+//  @Override
+//  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//      response.setContentType("text/plain");
+//
+//      this.airlines.clear();
+//
+//      PrintWriter pw = response.getWriter();
+//      pw.println("Deleted all airlines + flights");
+//      pw.flush();
+//
+//      response.setStatus(HttpServletResponse.SC_OK);
+//  }
 
 }

@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -28,10 +29,15 @@ public class XmlParser implements AirlineParser {
      */
     private File file;
     private String airlineName;
+    private String xmlString;
 
     public XmlParser(String filePath, String name) {
         this.file = new File(filePath);                                      //File object
         this.airlineName = name;                                             //Airline name from command line
+    }
+
+    public XmlParser(String xmlString) {
+        this.xmlString = xmlString;
     }
 
     /**
@@ -44,14 +50,21 @@ public class XmlParser implements AirlineParser {
     @Override
     public Airline parse() throws ParserException {
 
-        if(!file.exists() || file.length() == 0) {
-            return null;
+        if(xmlString == null) {
+            if (!file.exists() || file.length() == 0) {
+                return null;
+            }
         }
 
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(file);
+            Document doc;
+            if(xmlString == null) {
+                doc = dBuilder.parse(file);
+            } else {
+                doc = dBuilder.parse(new InputSource(new StringReader(xmlString)));
+            }
             doc.getDocumentElement().normalize();
             if(doc.getDocumentElement().getNodeName() != "airline") {
                 throw new SAXException("XML's root tag should be 'airline");
@@ -63,10 +76,6 @@ public class XmlParser implements AirlineParser {
             String airName = e1.getTextContent();
 
             Airline airline = new Airline(airName);
-
-            if (!airline.getName().equals(airlineName)) {
-                throw new ParserException("Airline name provided does not match that of XML file. Flight has not been added.");
-            }
 
             NodeList nList = doc.getElementsByTagName("flight");
 
@@ -155,8 +164,6 @@ public class XmlParser implements AirlineParser {
             throw new IllegalArgumentException(e.getMessage());
         } catch (NullPointerException e) {
             throw new NullPointerException(e.getMessage());
-        } catch (ParserException e) {
-            throw new ParserException(e.getMessage());
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {

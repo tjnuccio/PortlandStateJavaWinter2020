@@ -27,11 +27,12 @@ public class XmlDumper<T extends Airline> implements AirlineDumper<Airline> {
 
     private File file;
     private Writer output;
+    private PrintWriter pw;
     protected final String SYSTEM_ID = "http://www.cs.pdx.edu/~whitlock/dtds/airline.dtd";
     protected final String PUBLIC_ID = "-//Portland State University//DTD CS410J Airline//EN";
 
-    public XmlDumper(ServletOutputStream out) throws IOException {
-        this.output = new PrintWriter(out);
+    public XmlDumper(PrintWriter out) throws IOException {
+        this.pw = out;
     }
     /**
      * TextDumper Constructor
@@ -143,7 +144,7 @@ public class XmlDumper<T extends Airline> implements AirlineDumper<Airline> {
         //Write XML to file
         try {
             Source src = new DOMSource(doc);
-            Result res = new StreamResult(output);
+            Result res = new StreamResult(pw);
             TransformerFactory xFactory = TransformerFactory.newInstance();
             Transformer xform = xFactory.newTransformer();
             xform.setOutputProperty(OutputKeys.INDENT, "yes");

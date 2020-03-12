@@ -1,16 +1,17 @@
 package edu.pdx.cs410J.nucciotj;
 
+import edu.pdx.cs410J.AirportNames;
+import edu.pdx.cs410J.ParserException;
+
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
+ * @author TJ Nuccio
  * The main class that parses the command line and communicates with the
- * Airline server using REST.
+ * Airline server using REST. It takes commands to search for an airline on the server,
+ * add an airline to the server, and will pretty print to the command line.
  */
 public class Project5 {
 
@@ -35,12 +36,51 @@ public class Project5 {
             AirlineRestClient client = new AirlineRestClient(hostName, port);
 
             if(argList.size() == 1) {
-
+                //Only airline name supplied
+                //Retrieve airline from server
+                //Pretty print to console
 
                 String airlineName = argList.get(0);
+                String src = null;
+                String dest = null;
 
-                String msg = client.searchFlights(airlineName, null, null);
-                System.out.println(msg);
+                try {
+                    String msg = client.searchFlights(airlineName, src, dest);
+
+                    if (msg == null) {
+                        System.out.println("Airline " + airlineName + " was not found on the server");
+                    } else {
+                        try {
+                            XmlParser parser = new XmlParser(msg);
+                            Airline airline = parser.parse();
+
+                            List<Flight> list = new ArrayList<>(airline.getFlights());
+
+                            Collections.sort(list);
+
+                            System.out.println("Airline Name: " + airline.getName() + "\n");
+                            for (int i = 0; i < list.size(); i++) {
+
+                                Flight flight = list.get(i);
+
+                                long diffInMillies = Math.abs(flight.getArrival().getTime() - flight.getDeparture().getTime());
+                                long diff = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+                                System.out.println("Flight Number: " + flight.getNumber());
+                                System.out.println("    Source: " + AirportNames.getName(flight.getSource()));
+                                System.out.println("    Departure Time: " + flight.getDTimeString() + flight.getDAMPMString() + ", on " + flight.getDDateString());
+                                System.out.println("    Destination: " + AirportNames.getName(flight.getDestination()));
+                                System.out.println("    Arrival Time: " + flight.getATimeString() + flight.getAAMPMString() + ", on " + flight.getADateString());
+                                System.out.println("    Total Flight Time: " + diff + " mins");
+
+                            }
+                        } catch (ParserException ex) {
+                            System.out.println("Airline is not on server");
+                        }
+                    }
+                } catch(Exception ex) {
+                    System.out.println("Airline is not on server");
+                }
 
 
             } else if(optionList.contains("-search")) {
@@ -51,13 +91,65 @@ public class Project5 {
 
                     String airlineName = argList.get(0);
                     String src = argList.get(1);
-                    String dest  = argList.get(2);
+                    String dest = argList.get(2);
 
                     String msg = client.searchFlights(airlineName, src, dest);
-                    System.out.println(msg);
 
+                    if(src.length() != 3) {
+                        throw new IllegalArgumentException("Flight source should be a three-letter code.");
+                    } else if (src.matches(".*\\d.*")) {
+                        throw new IllegalArgumentException(src + " contains integer values. Should be three-letter code.");
+                    }
+
+                    if(AirportNames.getName(src) == null) {
+                        throw new IllegalArgumentException("Airport " + src + " has not been found to be a valid airport. Flight has not been added.");
+                    }
+
+                    //Flight destination
+                    if(dest.length() != 3) {
+                        throw new IllegalArgumentException("Flight destination should be three-letter code.");
+                    } else if(dest.matches(".*\\d.*")) {
+                        throw new IllegalArgumentException(dest + " contains integer values. Should be three-letter code.");
+                    }
+
+                    if(AirportNames.getName(dest) == null) {
+                        throw new IllegalArgumentException("Airport " + dest + " has not been found to be a valid airport. Flight has not been added.");
+                    }
+
+                    if (msg == null) {
+                        System.out.println("Airline " + airlineName + " was not found on the server");
+                    } else {
+                        try {
+                            XmlParser parser = new XmlParser(msg);
+                            Airline airline = parser.parse();
+
+                            List<Flight> list = new ArrayList<>(airline.getFlights());          //Begin pretty print
+
+                            Collections.sort(list);
+
+                            System.out.println("Airline Name: " + airline.getName() + "\n");
+                            for (int i = 0; i < list.size(); i++) {
+
+                                Flight flight = list.get(i);
+
+                                long diffInMillies = Math.abs(flight.getArrival().getTime() - flight.getDeparture().getTime());
+                                long diff = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+                                System.out.println("Flight Number: " + flight.getNumber());
+                                System.out.println("    Source: " + AirportNames.getName(flight.getSource()));
+                                System.out.println("    Departure Time: " + flight.getDTimeString() + flight.getDAMPMString() + ", on " + flight.getDDateString());
+                                System.out.println("    Destination: " + AirportNames.getName(flight.getDestination()));
+                                System.out.println("    Arrival Time: " + flight.getATimeString() + flight.getAAMPMString() + ", on " + flight.getADateString());
+                                System.out.println("    Total Flight Time: " + diff + " mins");
+                            }
+                        } catch (ParserException ex) {
+                            System.out.println("No flights found starting at " + src + " and ending at " + dest + ".");
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    printErrorMessageAndExit(e.getMessage());
                 } catch (Exception e) {
-                    printErrorMessageAndExit("Error: " + e.getMessage());
+                    printErrorMessageAndExit("No flights found with that starting and ending destination.");
                 }
 
             } else {                                                                              //Add flight to server
