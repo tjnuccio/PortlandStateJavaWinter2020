@@ -21,7 +21,7 @@ allprojects {
         google()
         jcenter()
         maven {
-            url 'https://dl.bintray.com/davidwhitclock/maven'
+            url 'https://dl.bintray.com/davidwhitlock/maven'
         }
     }
 }
